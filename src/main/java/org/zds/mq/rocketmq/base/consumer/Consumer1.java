@@ -1,4 +1,4 @@
-package org.zds.mq.rocketmq.consumer;
+package org.zds.mq.rocketmq.base.consumer;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

@@ -1,4 +1,4 @@
-package org.zds.mq.rocketmq.producer;
+package org.zds.mq.rocketmq.base.producer;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
