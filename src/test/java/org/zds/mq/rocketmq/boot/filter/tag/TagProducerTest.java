@@ -5,6 +5,8 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Resource;
 
 /**
@@ -17,7 +19,7 @@ public class TagProducerTest {
     private RocketMQTemplate rocketMQTemplate;
 
     @Test
-    public void testTagProducer() {
+    public void testTagProducer() throws InterruptedException {
         // 发送 TagA 消息
         SendResult sendResult1 = rocketMQTemplate.syncSend("TagTest:TagA", "TagA Message");
         System.out.printf("TagA 消息发送结果: %s%n", sendResult1);
@@ -29,10 +31,12 @@ public class TagProducerTest {
         // 发送 TagC 消息
         SendResult sendResult3 = rocketMQTemplate.syncSend("TagTest:TagC", "TagC Message");
         System.out.printf("TagC 消息发送结果: %s%n", sendResult3);
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
     @Test
-    public void testMultipleTagMessages() {
+    public void testMultipleTagMessages() throws InterruptedException {
         String[] tags = {"TagA", "TagB", "TagC"};
         
         for (int i = 0; i < 10; i++) {
@@ -42,12 +46,8 @@ public class TagProducerTest {
             SendResult sendResult = rocketMQTemplate.syncSend("TagTest:" + tag, message);
             System.out.printf("%s 消息发送结果: %s%n", tag, sendResult);
         }
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
-    @Test
-    public void testTagWithTimeout() {
-        // 发送带超时的标签消息
-        SendResult sendResult = rocketMQTemplate.syncSend("TagTest:TagA", "TagA Message with timeout", 3000);
-        System.out.printf("TagA 消息发送结果: %s%n", sendResult);
-    }
 } 

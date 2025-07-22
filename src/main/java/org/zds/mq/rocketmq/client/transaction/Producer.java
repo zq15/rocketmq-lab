@@ -36,9 +36,7 @@ public class Producer {
                 } else {
                     return LocalTransactionState.UNKNOW;
                 }
-
             }
-
             /**
              * MQ进行消息事务状态回查
              * @param msg Check message
@@ -51,7 +49,7 @@ public class Producer {
                 return LocalTransactionState.COMMIT_MESSAGE;
             }
         });
-        producer.setNamesrvAddr("192.168.139.10:9876");
+        producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
         String[] tags = new String[]{"TagA", "TagB", "TagC"};
         for (int i = 0; i < 3; i++) {
@@ -65,7 +63,6 @@ public class Producer {
                 e.printStackTrace();
             }
         }
-
         // 不结束，需要调用检查的方法
 //        producer.shutdown();
     }

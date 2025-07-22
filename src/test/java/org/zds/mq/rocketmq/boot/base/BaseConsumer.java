@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * 基础消息消费者 - 负载均衡模式
  */
 @Component
-@Profile({"base", "test-base", "all"})
 @RocketMQMessageListener(
     topic = "TopicTest",
     consumerGroup = "base-consumer-group",

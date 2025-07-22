@@ -19,4 +19,5 @@ rocketmq:
     # 压缩消息阈值，默认4k(1024 * 4)
     compressMessageBodyThreshold: 4096
     # 是否在内部发送失败时重试另一个broker，默认false
+    # 集群模式需要开启
     retryNextServer: false

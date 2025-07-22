@@ -12,7 +12,7 @@ import java.util.List;
 public class Consumer {
     public static void main(String[] args) throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("group1");
-        consumer.setNamesrvAddr("192.168.139.10:9876");
+        consumer.setNamesrvAddr("127.0.0.1:9876");
         consumer.subscribe("TransactionTopic", "*");
         consumer.setMessageModel(MessageModel.CLUSTERING);
         consumer.registerMessageListener(new MessageListenerConcurrently() {

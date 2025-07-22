@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * 消费所有 Tag 消息的消费者
  */
 @Component
-@Profile({"filter", "tag", "test-filter", "test-tag", "all"})
 @RocketMQMessageListener(
     topic = "TagFilterTopic",
     consumerGroup = "tag-all-consumer-group",

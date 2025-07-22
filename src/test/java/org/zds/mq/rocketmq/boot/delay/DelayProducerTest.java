@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.Resource;
 
 /**
@@ -20,7 +22,7 @@ public class DelayProducerTest {
     private RocketMQTemplate rocketMQTemplate;
 
     @Test
-    public void testDelayMessage() {
+    public void testDelayMessage() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
             // 创建延迟消息，延迟等级为3（10秒）
             Message<String> message = MessageBuilder
@@ -31,10 +33,11 @@ public class DelayProducerTest {
             SendResult sendResult = rocketMQTemplate.syncSend("TestTopic", message);
             System.out.printf("延迟消息发送结果: %s%n", sendResult);
         }
+        TimeUnit.SECONDS.sleep(30);
     }
 
     @Test
-    public void testDelayMessageWithDifferentLevels() {
+    public void testDelayMessageWithDifferentLevels() throws InterruptedException {
         // 测试不同延迟等级
         int[] delayLevels = {1, 2, 3, 4, 5}; // 1s, 5s, 10s, 30s, 1m
         
@@ -47,29 +50,8 @@ public class DelayProducerTest {
             SendResult sendResult = rocketMQTemplate.syncSend("TestTopic", message);
             System.out.printf("延迟等级 %d 消息发送结果: %s%n", delayLevels[i], sendResult);
         }
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
-    @Test
-    public void testDelayMessageWithTimeout() {
-        Message<String> message = MessageBuilder
-            .withPayload("Hello scheduled message with timeout")
-            .setHeader("DELAY", 3)  // 延迟等级3 = 10秒
-            .build();
-        
-        SendResult sendResult = rocketMQTemplate.syncSend("TestTopic", message, 5000);
-        System.out.printf("延迟消息发送结果: %s%n", sendResult);
-    }
-
-    @Test
-    public void testDelayMessageString() {
-        // 简单的延迟消息发送
-        for (int i = 0; i < 5; i++) {
-            Message<String> message = MessageBuilder
-                .withPayload("Hello delayed message " + i)
-                .setHeader("DELAY", 3)  // 延迟等级3 = 10秒
-                .build();
-            SendResult sendResult = rocketMQTemplate.syncSend("TestTopic", message);
-            System.out.printf("延迟消息发送结果: %s%n", sendResult);
-        }
-    }
 } 

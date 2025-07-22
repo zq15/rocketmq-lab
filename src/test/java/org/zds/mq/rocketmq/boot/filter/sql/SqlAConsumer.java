@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  * SQL 过滤消费者 - 只消费 a=1 的消息
  */
 @Component
-@Profile({"filter", "sql", "test-filter", "test-sql", "all"})
 @RocketMQMessageListener(
     topic = "SqlFilterTopic",
     consumerGroup = "sql-a-consumer-group",

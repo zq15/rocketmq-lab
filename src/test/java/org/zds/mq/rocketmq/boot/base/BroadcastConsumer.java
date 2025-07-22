@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  * 广播消费者
  */
 @Component
-@Profile({"base", "test-base", "all"})
 @RocketMQMessageListener(
     topic = "TopicTest",
     consumerGroup = "boot_broadcast_consumer_group",

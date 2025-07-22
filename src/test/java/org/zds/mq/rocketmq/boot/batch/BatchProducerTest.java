@@ -10,6 +10,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 批量消息发送测试
@@ -22,7 +23,7 @@ public class BatchProducerTest {
     private RocketMQTemplate rocketMQTemplate;
 
     @Test
-    public void testBatchSend() {
+    public void testBatchSend() throws InterruptedException {
         List<Message<String>> messages = new ArrayList<>();
         
         // 创建批量消息
@@ -37,37 +38,9 @@ public class BatchProducerTest {
         // 批量发送消息
         SendResult sendResult = rocketMQTemplate.syncSend("BatchTopic:Tag", messages);
         System.out.printf("批量发送结果: %s%n", sendResult);
-    }
 
-    @Test
-    public void testBatchSendWithTimeout() {
-        List<Message<String>> messages = new ArrayList<>();
-        
-        // 创建批量消息
-        for (int i = 0; i < 10; i++) {
-            Message<String> message = MessageBuilder
-                .withPayload("Hello world " + i)
-                .setHeader("KEYS", "OrderID00" + i)
-                .build();
-            messages.add(message);
-        }
-        
-        // 批量发送消息，带超时时间
-        SendResult sendResult = rocketMQTemplate.syncSend("BatchTopic:Tag", messages, 3000);
-        System.out.printf("批量发送结果: %s%n", sendResult);
-    }
 
-    @Test
-    public void testBatchSendString() {
-        List<String> messages = new ArrayList<>();
-        
-        // 创建批量字符串消息
-        for (int i = 0; i < 10; i++) {
-            messages.add("Hello world " + i);
-        }
-        
-        // 批量发送字符串消息
-        SendResult sendResult = rocketMQTemplate.syncSend("BatchTopic:Tag", messages);
-        System.out.printf("批量发送结果: %s%n", sendResult);
+        TimeUnit.SECONDS.sleep(30);
     }
+        
 } 

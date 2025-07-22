@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * 延迟消息简单消费者
  */
 @Component
-@Profile({"delay", "test-delay", "all"})
 @RocketMQMessageListener(
     topic = "DelayTopic",
     consumerGroup = "delay-simple-consumer-group",

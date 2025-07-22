@@ -45,6 +45,8 @@ public class AsyncProducerTest {
         
         // 等待所有异步发送完成
         latch.await(30, TimeUnit.SECONDS);
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
     @Test
@@ -76,6 +78,8 @@ public class AsyncProducerTest {
         
         // 等待所有异步发送完成
         latch.await(30, TimeUnit.SECONDS);
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
     @Test
@@ -103,5 +107,7 @@ public class AsyncProducerTest {
         
         // 等待所有异步发送完成
         latch.await(30, TimeUnit.SECONDS);
+
+        TimeUnit.SECONDS.sleep(30);
     }
 } 

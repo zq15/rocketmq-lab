@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * 批量消息消费者
  */
 @Component
-@Profile({"batch", "test-batch", "all"})
 @RocketMQMessageListener(
     topic = "BatchTest",
     consumerGroup = "batch-consumer-group",
